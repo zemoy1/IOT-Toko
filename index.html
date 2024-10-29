@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Online - WarungKita</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f5;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #070707;
+            padding: 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 15px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cart {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart span {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 8px;
+            font-size: 14px;
+        }
+
+        /* Product Section */
+        .product-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 40px;
+        }
+
+        .product-card {
+            background-color: white;
+            margin: 10px;
+            padding: 20px;
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            margin: 15px 0;
+        }
+
+        .product-card p {
+            color: #666;
+        }
+
+        .product-card button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .product-card button:hover {
+            background-color: #218838;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .cart-modal h2 {
+            margin-bottom: 15px;
+        }
+
+        .cart-modal ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cart-modal ul li {
+            margin-bottom: 10px;
+        }
+
+        .cart-modal button {
+            background-color: #0e0e0f;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0c0d0d;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IOT Toko</h1>
+        <nav>
+            <ul>
+                <li><a href="beranda.html">Beranda</a></li>
+                <li><a href="index.html">Produk</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+        <div class="cart" onclick="toggleCartModal()">
+            🛒 <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <main class="product-container">
+        <div class="product-card" data-id="1">
+            <img src="https://via.placeholder.com/250" alt="Produk 1">
+            <h3>Produk 1</h3>
+            <p>Rp 50.000</p>
+            <button onclick="addToCart('Produk 1', 50000)">Tambah ke Keranjang</button>
+        </div>
+        <div class="product-card" data-id="2">
+            <img src="https://via.placeholder.com/250" alt="Produk 2">
+            <h3>Produk 2</h3>
+            <p>Rp 75.000</p>
+            <button onclick="addToCart('Produk 2', 75000)">Tambah ke Keranjang</button>
+        </div>
+        <div class="product-card" data-id="3">
+            <img src="https://via.placeholder.com/250" alt="Produk 3">
+            <h3>Produk 3</h3>
+            <p>Rp 100.000</p>
+            <button onclick="addToCart('Produk 3', 100000)">Tambah ke Keranjang</button>
+        </div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cart-modal">
+        <h2>Keranjang Belanja</h2>
+        <ul id="cart-items"></ul>
+        <button onclick="toggleCartModal()">Tutup</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 IOT Toko. Welcome and Thanks for buy</p>
+    </footer>
+
+    <script>
+        // JavaScript Logic untuk Keranjang Belanja
+        let cart = [];
+
+        function addToCart(productName, productPrice) {
+            cart.push({ name: productName, price: productPrice });
+            updateCartCount();
+            alert(`${productName} berhasil ditambahkan ke keranjang!`);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        function toggleCartModal() {
+            const cartModal = document.getElementById('cart-modal');
+            cartModal.style.display = cartModal.style.display === 'none' ? 'block' : 'none';
+            displayCartItems();
+        }
+
+        function displayCartItems() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - Rp ${item.price.toLocaleString()}`;
+                cartItems.appendChild(li);
+            });
+        }
+    </script>
+
+</body>
+</html>

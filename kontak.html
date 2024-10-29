@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - WarungKita</title>
+
+    <style>
+        /* CSS Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* Header */
+        header {
+            background-color: #080808;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 15px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Konten Utama */
+        .kontak-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 40px;
+        }
+
+        .kontak-info, .kontak-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 40%;
+        }
+
+        .kontak-info h2, .kontak-form h2 {
+            margin-bottom: 15px;
+            color: #090909;
+        }
+
+        .kontak-info p {
+            margin-bottom: 10px;
+        }
+
+        .kontak-info p strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Form Kontak */
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        form button {
+            background-color: #020202;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #040404;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #090909;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>IOT Toko</h1>
+        <nav>
+            <ul>
+                <li><a href="beranda.html">Beranda</a></li>
+                <li><a href="index.html">Produk</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Konten Utama -->
+    <div class="kontak-container">
+        <!-- Informasi Kontak -->
+        <div class="kontak-info">
+            <h2>Informasi Kontak</h2>
+            <p><strong>Alamat:</strong> Jl. Deltamas No 5A,Bekasi, Indonesia</p>
+            <p><strong>Email:</strong> IOToko@gmail.com</p>
+            <p><strong>Telepon:</strong> +62 882 8937 8889</p>
+            <p><strong>Jam Operasional:</strong> Senin - Jumat: 09.00 - 17.00</p>
+        </div>
+
+        <!-- Formulir Kontak -->
+        <div class="kontak-form">
+            <h2>Kirim Pesan</h2>
+            <form>
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required>
+
+                <label for="pesan">Pesan:</label>
+                <textarea id="pesan" name="pesan" rows="5" placeholder="Tulis pesan Anda di sini" required></textarea>
+
+                <button type="submit">Kirim Pesan</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 IOT Toko. Welcome and Thanks for buy.</p>
+    </footer>
+
+</body>
+</html>
