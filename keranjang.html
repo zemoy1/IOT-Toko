@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja</title>
+
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #070707;
+            padding: 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 15px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+
+        h1 {
+            text-align: center;
+            color: #090909;
+        }
+
+        .product-list, .cart {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product:last-child {
+            border-bottom: none;
+        }
+
+        .product button {
+            background-color: #0b0b0b;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product button:hover {
+            background-color: #070707;
+        }
+
+        .cart-items {
+            margin-top: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .total {
+            text-align: right;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .clear-cart {
+            margin-top: 10px;
+            background-color: #090909;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .clear-cart:hover {
+            background-color: #090909;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IOT Toko</h1>
+        <nav>
+            <ul>
+                <li><a href="beranda.html">Beranda</a></li>
+                <li><a href="index.html">Produk</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Keranjang Belanja</h1>
+
+    <!-- Daftar Produk -->
+    <div class="product-list">
+        <h2>Produk Tersedia</h2>
+        <div class="product">
+            <span>Produk A - Rp50.000</span>
+            <button onclick="addToCart('Produk A', 50000)">Tambah ke Keranjang</button>
+        </div>
+        <div class="product">
+            <span>Produk B - Rp75.000</span>
+            <button onclick="addToCart('Produk B', 75000)">Tambah ke Keranjang</button>
+        </div>
+        <div class="product">
+            <span>Produk C - Rp100.000</span>
+            <button onclick="addToCart('Produk C', 100000)">Tambah ke Keranjang</button>
+        </div>
+    </div>
+
+    <!-- Keranjang Belanja -->
+    <div class="cart">
+        <h2>Keranjang Anda</h2>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="total" id="total">Total: Rp0</div>
+        <button class="clear-cart" onclick="clearCart()">Kosongkan Keranjang</button>
+    </div>
+
+    <script>
+        // JavaScript untuk Keranjang Belanja
+        let cart = [];
+        
+        function addToCart(productName, productPrice) {
+            const product = { name: productName, price: productPrice };
+            cart.push(product);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const totalElement = document.getElementById('total');
+            cartItems.innerHTML = ''; // Kosongkan konten sebelumnya
+            
+            let total = 0;
+
+            // Tampilkan produk di keranjang
+            cart.forEach((item, index) => {
+                total += item.price;
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <span>${item.name} - Rp${item.price.toLocaleString()}</span>
+                    <button onclick="removeFromCart(${index})">Hapus</button>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+
+            // Update total harga
+            totalElement.innerText = `Total: Rp${total.toLocaleString()}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1); // Hapus produk berdasarkan indeks
+            updateCart();
+        }
+
+        function clearCart() {
+            cart = []; // Kosongkan keranjang
+            updateCart();
+        }
+    </script>
+
+</body>
+</html>
